@@ -1,0 +1,16 @@
+# Carpetas de compilación 
+bin/
+obj/
+
+# Carpetas de configuración local de Visual Studio
+.vs/
+*.user
+*.suo
+
+# Archivos temporales y de caché
+*.tmp
+*.log
+*.cache
+
+# Archivos de la base de datos local de VS
+*.sqlite
