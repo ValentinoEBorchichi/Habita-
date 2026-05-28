@@ -1,0 +1,24 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Bienvenido al Sistema de Reportes de Animales</h1>
+    <p>Utilice el menú para navegar por el sistema.</p>
+    
+    @if (!User.Identity?.IsAuthenticated ?? true)
+    {
+        <a asp-page="/Account/Login" class="btn btn-primary btn-lg">Iniciar Sesión</a>
+    }
+    else
+    {
+        <div class="alert alert-success">
+            Sesión iniciada como: <strong>@User.Identity?.Name</strong>
+        </div>
+        <form method="post" asp-page="/Account/Logout">
+            <button type="submit" class="btn btn-outline-danger">Cerrar Sesión</button>
+        </form>
+    }
+</div>

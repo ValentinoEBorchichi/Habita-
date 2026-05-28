@@ -7,6 +7,8 @@ GO
 CREATE TABLE Usuarios (
     Id INT PRIMARY KEY IDENTITY(1,1),
     NombreCompleto NVARCHAR(100) NOT NULL,
+    Email NVARCHAR(100) NOT NULL UNIQUE,
+    Password NVARCHAR(100) NOT NULL,
     Telefono NVARCHAR(50)
 );
 
@@ -33,8 +35,9 @@ CREATE TABLE Animales (
 );
 
 -- Insertar datos de prueba
-INSERT INTO Usuarios (NombreCompleto, Telefono) VALUES ('Juan Perez', '11-1234-5678');
-INSERT INTO Usuarios (NombreCompleto, Telefono) VALUES ('Maria Gomez', '11-8765-4321');
+INSERT INTO Usuarios (NombreCompleto, Email, Password, Telefono) VALUES ('Juan Perez', 'juan@gmail.com', 'juan123', '11-1234-5678');
+INSERT INTO Usuarios (NombreCompleto, Email, Password, Telefono) VALUES ('Maria Gomez', 'maria@gmail.com', 'maria123', '11-8765-4321');
+INSERT INTO Usuarios (NombreCompleto, Email, Password, Telefono) VALUES ('Admin Sistema', 'admin@animales.com', 'admin123', '0800-ANIMAL');
 
 INSERT INTO Autoridades (Nombre, Cargo, TelefonoContacto) VALUES ('Oficial Rodriguez', 'Control Animal', '103');
 INSERT INTO Autoridades (Nombre, Cargo, TelefonoContacto) VALUES ('Inspectora Silva', 'Zoonosis', '105');

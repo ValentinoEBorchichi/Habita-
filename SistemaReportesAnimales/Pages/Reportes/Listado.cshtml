@@ -1,0 +1,30 @@
+@page
+@model SistemaReportesAnimales.Pages.Reportes.ListadoModel
+@{
+    ViewData["Title"] = "Listado de Reportes";
+}
+
+<h2>@ViewData["Title"]</h2>
+<p>Esta es una página protegida. Solo puedes ver esto si estás logueado.</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Ubicación</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model.Reportes)
+        {
+            <tr>
+                <td>@r.Id</td>
+                <td>@r.FechaReporte.ToShortDateString()</td>
+                <td>@r.Ubicacion</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-page="/Index" class="btn btn-secondary">Volver</a>
