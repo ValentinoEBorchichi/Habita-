@@ -14,8 +14,7 @@
                  <th>Fecha</th>
                  <th>Ubicación</th>
                  <th>Denunciante</th>
-                 <th>Autoridad</th>
-                 <th>Animales</th>
+                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -27,23 +26,10 @@
                    <td>@r.Ubicacion</td>
                    <td>@(r.UsuarioReportante?.NombreCompleto ??
       "N/A")</td>
-                    <td>@(r.AutoridadAsignada?.Nombre ?? "Sin asignar")</td>
                     <td>
-                        @if (r.AnimalesSueltos != null &&
-      r.AnimalesSueltos.Any())
-                        {
-                            <ul>
-                                @foreach (var animal in r.AnimalesSueltos)
-                                {
-                                    <li><strong>@animal.Especie:</strong>
-      @animal.Descripcion</li>
-                                }
-                            </ul>
-                        }
-                       else
-                        {
-                           <span>Sin datos</span>
-                        }
+                        <a asp-page="./Detalle" asp-route-id="@r.Id" class="btn btn-info btn-sm text-white">
+                            <i class="bi bi-eye"></i> Ver Detalle
+                        </a>
                     </td>
                 </tr>
             }

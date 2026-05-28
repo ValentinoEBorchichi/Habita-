@@ -1,0 +1,88 @@
+@page "{id:int}"
+@model SistemaReportesAnimales.Pages.Reportes.DetalleModel
+@{
+    ViewData["Title"] = "Detalle del Reporte";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Detalle del Reporte #@Model.Reporte.Id</h2>
+        <a asp-page="./Listado" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Volver al Listado
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Información General</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Fecha del Reporte:</strong> @Model.Reporte.FechaReporte.ToString("dd/MM/yyyy HH:mm")</p>
+                    <p><strong>Ubicación:</strong> @Model.Reporte.Ubicacion</p>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Usuario Reportante</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.Reporte.UsuarioReportante != null)
+                    {
+                        <p><strong>Nombre:</strong> @Model.Reporte.UsuarioReportante.NombreCompleto</p>
+                        <p><strong>Teléfono:</strong> @Model.Reporte.UsuarioReportante.Telefono</p>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No hay información del usuario reportante.</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Autoridad Asignada</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.Reporte.AutoridadAsignada != null)
+                    {
+                        <p><strong>Nombre:</strong> @Model.Reporte.AutoridadAsignada.Nombre</p>
+                        <p><strong>Cargo:</strong> @Model.Reporte.AutoridadAsignada.Cargo</p>
+                        <p><strong>Contacto:</strong> @Model.Reporte.AutoridadAsignada.TelefonoContacto</p>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No hay autoridad asignada a este reporte.</p>
+                    }
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0">Animales Reportados</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.Reporte.AnimalesSueltos != null && Model.Reporte.AnimalesSueltos.Any())
+                    {
+                        <ul class="list-group">
+                            @foreach (var animal in Model.Reporte.AnimalesSueltos)
+                            {
+                                <li class="list-group-item">
+                                    <strong>@animal.Especie:</strong> @animal.Descripcion
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No se registraron animales en este reporte.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -14,6 +14,10 @@ string connectionString = builder.Configuration.GetConnectionString("DefaultConn
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
+// Register ADO.NET Repository
+builder.Services.AddScoped<SistemaReportesAnimales.Repositories.IReporteRepository>(provider => 
+    new SistemaReportesAnimales.Repositories.AdoNetReporteRepository(connectionString));
+
 // 3. Configurar Autenticación por Cookies
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>

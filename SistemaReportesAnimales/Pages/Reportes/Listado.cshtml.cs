@@ -1,29 +1,24 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using SistemaReportesAnimales.Data;
 using SistemaReportesAnimales.Models;
+using SistemaReportesAnimales.Repositories;
 
 namespace SistemaReportesAnimales.Pages.Reportes;
 
-[Authorize] // Este decorador es la clave para proteger la página
+[Authorize]
 public class ListadoModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IReporteRepository _reporteRepository;
 
-    public ListadoModel(ApplicationDbContext context)
+    public ListadoModel(IReporteRepository reporteRepository)
     {
-        _context = context;
+        _reporteRepository = reporteRepository;
     }
 
     public List<Reporte> Reportes { get; set; } = new List<Reporte>();
 
-    public async Task OnGetAsync()
+    public void OnGet()
     {
-        Reportes = await _context.Reportes
-           .Include(r => r.UsuarioReportante)
-           .Include(r => r.AutoridadAsignada)
-           .Include(r => r.AnimalesSueltos)
-           .ToListAsync();
+        Reportes = _reporteRepository.ObtenerTodosLosReportes();
     }
 }

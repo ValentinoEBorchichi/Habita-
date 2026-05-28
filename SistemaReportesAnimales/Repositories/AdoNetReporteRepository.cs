@@ -89,8 +89,8 @@ public class AdoNetReporteRepository : IReporteRepository
                        u.Id as UsuarioId, u.NombreCompleto, u.Telefono as UsuarioTelefono,
                        a.Id as AutoridadId, a.Nombre as AutoridadNombre, a.Cargo, a.TelefonoContacto
                 FROM Reportes r
-                LEFT JOIN Usuarios u ON r.UsuarioId = u.Id
-                LEFT JOIN Autoridades a ON r.AutoridadId = a.Id
+                LEFT JOIN Usuarios u ON r.UsuarioReportanteId = u.Id
+                LEFT JOIN Autoridades a ON r.AutoridadAsignadaId = a.Id
                 WHERE r.Id = @Id";
 
             SqlCommand cmd = new SqlCommand(query, conn);
