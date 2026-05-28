@@ -24,5 +24,6 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Autoridad>().ToTable("Autoridades");
         modelBuilder.Entity<Reporte>().ToTable("Reportes");
         modelBuilder.Entity<Animal>().ToTable("Animales");
+
     }
 }

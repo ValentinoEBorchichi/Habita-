@@ -20,6 +20,10 @@ public class ListadoModel : PageModel
 
     public async Task OnGetAsync()
     {
-        Reportes = await _context.Reportes.ToListAsync();
+        Reportes = await _context.Reportes
+           .Include(r => r.UsuarioReportante)
+           .Include(r => r.AutoridadAsignada)
+           .Include(r => r.AnimalesSueltos)
+           .ToListAsync();
     }
 }
