@@ -1,5 +1,4 @@
-@page
-@model SistemaReportesAnimales.Pages.Account.LoginModel
+@model LoginViewModel
 @{
     ViewData["Title"] = "Iniciar Sesión";
 }
@@ -12,6 +11,10 @@
             </div>
             <div class="card-body">
                 <form method="post">
+                    @if (!string.IsNullOrEmpty(Model.ReturnUrl))
+                    {
+                        <input type="hidden" asp-for="ReturnUrl" />
+                    }
                     <div asp-validation-summary="All" class="text-danger"></div>
                     
                     <div class="mb-3">

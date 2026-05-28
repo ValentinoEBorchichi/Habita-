@@ -4,8 +4,8 @@ using SistemaReportesAnimales.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Configurar Razor Pages
-builder.Services.AddRazorPages();
+// 1. Configurar MVC con Vistas
+builder.Services.AddControllersWithViews();
 
 // 2. Configurar el DbContext (Entity Framework Core)
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection") 
@@ -46,6 +46,8 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapRazorPages();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

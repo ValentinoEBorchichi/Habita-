@@ -1,43 +1,35 @@
-Implementación de Login y Autenticación
+Implementación de Sistema de Reportes con ASP.NET Core MVC
 
-Para esta entrega, pasamos el proyecto de una aplicación de consola a un entorno web usando **ASP.NET Core Razor Pages. Implementamos un sistema de autenticación basado en **Cookies**, que es liviano y no requiere toda la complejidad de Identity.
+Este proyecto ha sido migrado de Razor Pages a una arquitectura **Modelo-Vista-Controlador (MVC)** bien estructurada, mejorando la separación de responsabilidades y la mantenibilidad del código.
 
-## Cambios realizados
+## Estructura del Proyecto
 
-### 1. Configuración del Proyecto (.csproj y Program.cs)
-- Se cambió el SDK del proyecto a `Microsoft.NET.Sdk.Web`.
-- Se agregaron los paquetes de **Entity Framework Core** para manejar la base de datos de forma más moderna.
-- En `Program.cs` se configuraron los servicios de autenticación y se definió que la página de login por defecto es `/Account/Login`.
+- **Controllers:** Manejan la lógica de las peticiones (Home, Account, Reportes).
+- **Views:** Contienen la interfaz de usuario organizada por controlador.
+- **Models:** Definen las entidades de la base de datos (Animal, Reporte, Usuario, etc.).
+- **ViewModels:** Modelos específicos para las vistas (ej. LoginViewModel), asegurando que las vistas reciban solo los datos necesarios.
+- **Repositories:** Implementan el acceso a datos (ADO.NET), permitiendo cambiar la fuente de datos fácilmente.
+- **Data:** Contiene el `ApplicationDbContext` para Entity Framework Core.
 
-### 2. Base de Datos y Modelos
-- Se actualizaron las clases de `Usuario` para incluir los campos `Email` y `Password`.
-- Se creó el `ApplicationDbContext` para mapear nuestras entidades a las tablas de SQL Server.
-- El script SQL (`script_bd.sql`) fue actualizado para incluir estas nuevas columnas y algunos usuarios de prueba.
+## Características
 
-### 3. Sistema de Login
-- **Página de Login:** Ubicada en `Pages/Account/Login.cshtml`. El Code-Behind (`OnPostAsync`) busca al usuario en la base de datos. Si las credenciales coinciden, genera una "identidad" (Claims) y crea la cookie de sesión.
-- **Logout:** Implementado en `Logout.cshtml.cs`, simplemente destruye la cookie y redirige al inicio.
+### 1. Autenticación Basada en Cookies
+Implementamos un sistema de autenticación liviano. La configuración se encuentra en `Program.cs` y el manejo en `AccountController`.
 
-### 4. Protección de Rutas (Seguridad)
-Para proteger cualquier página y que solo puedan entrar usuarios logueados, usamos el decorador `[Authorize]` arriba de la clase en el archivo `.cshtml.cs`. 
-Ejemplo (ver `Pages/Reportes/Listado.cshtml.cs`):
+### 2. Acceso a Datos Mixto
+- **Entity Framework Core:** Utilizado para la autenticación y gestión de usuarios.
+- **ADO.NET:** Utilizado a través del repositorio de reportes para un control granular sobre las consultas.
 
-```csharp
-[Authorize]
-public class ListadoModel : PageModel { 
-    // ... logic ...
-}
-```
-
-Si un usuario intenta entrar a esa página sin estar logueado, el sistema lo redirigirá automáticamente al Login.
+### 3. Seguridad
+Las rutas sensibles están protegidas mediante el atributo `[Authorize]` en los controladores correspondientes (ej. `ReportesController`).
 
 ## Usuarios de prueba
 - **Email:** `admin@animales.com` | **Password:** `admin123`
 - **Email:** `juan@gmail.com` | **Password:** `juan123`
 
 ## Instrucciones
-1. Asegurate de ejecutar el script `script_bd.sql` actualizado en tu servidor SQL.
-2. Ejecutá el proyecto. Se abrirá el navegador en el Inicio.
-3. Intentá entrar a "Ver Reportes (Protegido)". Verás que te manda al Login.
-4. Ingresá con las credenciales de prueba.
-5. Una vez logueado, ya podrás ver el listado y aparecerá tu nombre en la barra de navegación.
+1. Asegúrate de ejecutar el script `script_bd.sql` en tu servidor SQL para crear la base de datos `ControlAnimalesDB`.
+2. Configura la cadena de conexión en `appsettings.json` o usa la por defecto en `Program.cs`.
+3. Ejecuta el proyecto.
+4. Navega por el menú. Las secciones de reportes requerirán que inicies sesión.
+

@@ -1,5 +1,4 @@
-@page
-@model SistemaReportesAnimales.Pages.Reportes.ListadoModel
+@model List<Reporte>
 @{
     ViewData["Title"] = "Listado de Reportes";
 }
@@ -18,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var r in Model.Reportes)
+            @foreach (var r in Model)
             {
                 <tr>
                     <td>@r.Id</td>
@@ -27,7 +26,7 @@
                    <td>@(r.UsuarioReportante?.NombreCompleto ??
       "N/A")</td>
                     <td>
-                        <a asp-page="./Detalle" asp-route-id="@r.Id" class="btn btn-info btn-sm text-white">
+                        <a asp-controller="Reportes" asp-action="Detalle" asp-route-id="@r.Id" class="btn btn-info btn-sm text-white">
                             <i class="bi bi-eye"></i> Ver Detalle
                         </a>
                     </td>
@@ -36,4 +35,4 @@
         </tbody>
     </table>
 
-<a asp-page="/Index" class="btn btn-secondary">Volver</a>
+<a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Volver</a>

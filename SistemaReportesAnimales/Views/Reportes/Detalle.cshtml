@@ -1,13 +1,12 @@
-@page "{id:int}"
-@model SistemaReportesAnimales.Pages.Reportes.DetalleModel
+@model Reporte
 @{
     ViewData["Title"] = "Detalle del Reporte";
 }
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Detalle del Reporte #@Model.Reporte.Id</h2>
-        <a asp-page="./Listado" class="btn btn-secondary">
+        <h2>Detalle del Reporte #@Model.Id</h2>
+        <a asp-controller="Reportes" asp-action="Index" class="btn btn-secondary">
             <i class="bi bi-arrow-left"></i> Volver al Listado
         </a>
     </div>
@@ -19,8 +18,8 @@
                     <h5 class="mb-0">Información General</h5>
                 </div>
                 <div class="card-body">
-                    <p><strong>Fecha del Reporte:</strong> @Model.Reporte.FechaReporte.ToString("dd/MM/yyyy HH:mm")</p>
-                    <p><strong>Ubicación:</strong> @Model.Reporte.Ubicacion</p>
+                    <p><strong>Fecha del Reporte:</strong> @Model.FechaReporte.ToString("dd/MM/yyyy HH:mm")</p>
+                    <p><strong>Ubicación:</strong> @Model.Ubicacion</p>
                 </div>
             </div>
 
@@ -29,10 +28,10 @@
                     <h5 class="mb-0">Usuario Reportante</h5>
                 </div>
                 <div class="card-body">
-                    @if (Model.Reporte.UsuarioReportante != null)
+                    @if (Model.UsuarioReportante != null)
                     {
-                        <p><strong>Nombre:</strong> @Model.Reporte.UsuarioReportante.NombreCompleto</p>
-                        <p><strong>Teléfono:</strong> @Model.Reporte.UsuarioReportante.Telefono</p>
+                        <p><strong>Nombre:</strong> @Model.UsuarioReportante.NombreCompleto</p>
+                        <p><strong>Teléfono:</strong> @Model.UsuarioReportante.Telefono</p>
                     }
                     else
                     {
@@ -48,11 +47,11 @@
                     <h5 class="mb-0">Autoridad Asignada</h5>
                 </div>
                 <div class="card-body">
-                    @if (Model.Reporte.AutoridadAsignada != null)
+                    @if (Model.AutoridadAsignada != null)
                     {
-                        <p><strong>Nombre:</strong> @Model.Reporte.AutoridadAsignada.Nombre</p>
-                        <p><strong>Cargo:</strong> @Model.Reporte.AutoridadAsignada.Cargo</p>
-                        <p><strong>Contacto:</strong> @Model.Reporte.AutoridadAsignada.TelefonoContacto</p>
+                        <p><strong>Nombre:</strong> @Model.AutoridadAsignada.Nombre</p>
+                        <p><strong>Cargo:</strong> @Model.AutoridadAsignada.Cargo</p>
+                        <p><strong>Contacto:</strong> @Model.AutoridadAsignada.TelefonoContacto</p>
                     }
                     else
                     {
@@ -66,10 +65,10 @@
                     <h5 class="mb-0">Animales Reportados</h5>
                 </div>
                 <div class="card-body">
-                    @if (Model.Reporte.AnimalesSueltos != null && Model.Reporte.AnimalesSueltos.Any())
+                    @if (Model.AnimalesSueltos != null && Model.AnimalesSueltos.Any())
                     {
                         <ul class="list-group">
-                            @foreach (var animal in Model.Reporte.AnimalesSueltos)
+                            @foreach (var animal in Model.AnimalesSueltos)
                             {
                                 <li class="list-group-item">
                                     <strong>@animal.Especie:</strong> @animal.Descripcion

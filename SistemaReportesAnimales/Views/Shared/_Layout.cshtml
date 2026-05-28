@@ -10,14 +10,14 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-page="/Index">Sistema Reportes</a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">Sistema Reportes</a>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Index">Inicio</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Reportes/Listado">Ver Reportes (Protegido)</a>
+                            <a class="nav-link text-dark" asp-controller="Reportes" asp-action="Index">Ver Reportes (Protegido)</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav">
@@ -27,7 +27,7 @@
                                 <span class="nav-link text-dark">Hola, @User.Identity.Name</span>
                             </li>
                             <li class="nav-item">
-                                <form method="post" asp-page="/Account/Logout" class="form-inline">
+                                <form method="post" asp-controller="Account" asp-action="Logout" class="form-inline">
                                     <button type="submit" class="btn btn-link nav-link text-dark">Salir</button>
                                 </form>
                             </li>
@@ -35,7 +35,7 @@
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-page="/Account/Login">Login</a>
+                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
                             </li>
                         }
                     </ul>

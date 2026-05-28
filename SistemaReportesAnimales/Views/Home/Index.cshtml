@@ -1,5 +1,3 @@
-@page
-@model IndexModel
 @{
     ViewData["Title"] = "Inicio";
 }
@@ -10,14 +8,14 @@
     
     @if (!User.Identity?.IsAuthenticated ?? true)
     {
-        <a asp-page="/Account/Login" class="btn btn-primary btn-lg">Iniciar Sesión</a>
+        <a asp-controller="Account" asp-action="Login" class="btn btn-primary btn-lg">Iniciar Sesión</a>
     }
     else
     {
         <div class="alert alert-success">
             Sesión iniciada como: <strong>@User.Identity?.Name</strong>
         </div>
-        <form method="post" asp-page="/Account/Logout">
+        <form method="post" asp-controller="Account" asp-action="Logout">
             <button type="submit" class="btn btn-outline-danger">Cerrar Sesión</button>
         </form>
     }
