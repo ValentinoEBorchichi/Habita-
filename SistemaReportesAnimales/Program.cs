@@ -203,5 +203,11 @@ class Program
                 Console.WriteLine("  -> No hay animales registrados en este reporte.");
             }
         }
+        Console.WriteLine("=================================================");
+        Console.WriteLine("   SISTEMA DE CONTROL DE ANIMALES SUELTOS        ");
+        Console.WriteLine("=================================================");
+        Console.WriteLine("Estado actual: Modelos de dominio inicializados.");
+        Console.WriteLine("Presione cualquier tecla para salir...");
+        Console.ReadKey();
     }
 }
